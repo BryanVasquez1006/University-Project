@@ -1,0 +1,24 @@
+.main-sidebar {
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.welcome-msg{
+    width: 600px;
+    height: auto;
+    color: black;
+    background-color: white;
+    
+}
+
+.dashboard-logo {
+    width: 80px;
+}
+
+.brand-image {
+    width: 75px;
+}
