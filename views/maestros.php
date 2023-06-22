@@ -203,16 +203,48 @@ require './prueba.php';
                                     <td><?= $datos['fecha'] ?></td>
                                     <td><span class="asignment bg-warning p-1 rounded-1 fw-bold">Sin Asignación</span></td>
                                     <td class="d-flex">
-                                        <a href="#" class="btn btn-secondary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editTeacher<?php echo $id ?>">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#editTeacher<?php echo $datos['id'] ?>" class="text-info mx-2">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
+                                        <div class="modal fade" id="editTeacher<?php echo $datos['id'] ?>">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5">Editar Maestro </h1>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    </div>
+                                                    <div id="modalUpdateBody" class="modal-body">
+                                                        <form action="../logic/edit_person.php" method="POST">
+                                                            <input type="hidden" name="id" value="<?= $datos["id"] ?>">
+
+                                                            <div class="mb-3">
+                                                                <label for="email" class="form-label">Correo Electrónico</label>
+                                                                <input type="email" class="form-control" name="email" placeholder="Ingresa email" value="<?= $datos["email"] ?>" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="name" class="form-label">Nombre(s)</label>
+                                                                <input type="text" class="form-control" name="name" placeholder="Ingresa tu nombre" value="<?= $datos["nombre"] ?>" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="address" class="form-label">Dirección</label>
+                                                                <input type="text" class="form-control" name="address" placeholder="Ingresa la dirección" value="<?= $datos["direccion"] ?>" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="date" class="form-label">Fecha de nacimiento</label>
+                                                                <input type="date" class="form-control" name="date" placeholder="Ingresa fecha de nacimiento" value="<?= $datos["fecha"] ?>" required>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <a href="../logic/delete_person.php?id=<?php echo $datos['id'] ?>" class="btn btn-danger btn-sm">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
-
-
-
-
                                     </td>
                                 </tr>
 
@@ -228,17 +260,6 @@ require './prueba.php';
 
                             $sql = $conn->query("SELECT * FROM maestros WHERE id=$id");
                             ?>
-
-
-
-
-
-
-
-
-
-
-
                         </tbody>
                     </table>
 
@@ -302,101 +323,6 @@ require './prueba.php';
                         </div>
                     </div>
 
-
-                    <!-- Modal EDIT TEACHER -->
-
-
-
-
-                    <div class="modal fade" id="editTeacher<?php echo $id ?>" tabindex="-1" aria-labelledby="editTeacher<?php echo $id ?>" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="editTeacher">Editar Maestro</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-
-
-
-                                <div class="modal-body">
-                                    <form action="./maestros.php" method="post">
-                                        <input type="text" name="id" value="<?= $_GET['id'] ?>">
-                                        <?php
-
-                                        require '/xampp/htdocs/php-projects/FinalProject-4/University/logic/edit_person.php';
-                                        while ($datos = $sql->fetch(PDO::FETCH_ASSOC)) { ?>
-                                            <label for="">Nombre Completo</label>
-                                            <input type="text" name="edit_nombre" class="form-control" placeholder="Ingresa el nombre del maestro..." disabled value="<?= $datos['nombre'] ?>">
-
-                                            <label for="" class="mt-2">Correo Electronico</label>
-                                            <input type="email" name="edit_email" class="form-control" placeholder="Ingresa el email..." value="<?= $datos['email'] ?>">
-
-
-                                            <label for="" class="mt-2">Dirección</label>
-                                            <input type="text" name="edit_direccion" class="form-control" placeholder="Ingresa el la dirección..." value="<?= $datos['direccion'] ?>">
-
-
-                                            <label for="" class="mt-2">Fecha de Nacimiento</label>
-                                            <input type="date" name="edit_fecha" class="form-control" placeholder="Ingresa la fecha de nacimiento.." value="<?= $datos['fecha'] ?>">
-
-
-                                        <?php
-                                        }
-
-                                        ?>
-
-
-                                        <div class="dropdown mt-3">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Clase
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Administrador</a></li>
-                                                <li><a class="dropdown-item" href="#">Maestro</a></li>
-                                                <li><a class="dropdown-item" href="#">Estudiante</a></li>
-                                            </ul>
-                                        </div>
-
-
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                            <input type="submit" value="Guardar cambios" class="btn btn-primary" name="editBTN"></input>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal DELETE ANOTHER TEACHER -->
-                    <!-- <div class="modal fade" id="deleteTeacher" tabindex="-1" aria-labelledby="deleteTeacher" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="deleteTeacher">Eliminar Maestro</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-
-
-                                 <form action="./maestros.php">
-                                 <div class="modal-body">
-                                    <div>
-                                        <div class="alert alert-danger">
-                                            <h2>¿Está seguro que desea eliminar este maestro?</h2>
-                                        </div>
-                                        <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
-                                    <input type="submit" value="Guardar cambios" class="btn btn-primary" href="../logic/delete_person.php?id="></input>
-                                </div>
-                                        
-                                 </form>               
-                             
-
-                                    </div>
-                                </div>
-                                
-                            </div> -->
                 </div>
             </div>
 
