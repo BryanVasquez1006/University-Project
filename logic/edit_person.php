@@ -1,10 +1,11 @@
 <?php
 require '/xampp/htdocs/php-projects/FinalProject-4/University/logic/database.php';
 
-$nombre = $_POST['edit_nombre'];
-$correo = $_POST['edit_email'];
-$direccion = $_POST['edit_direccion'];
-$nacimiento = $_POST['edit_fecha'];
+$dni = $_POST['DNI'];
+$nombre = $_POST['name'];
+$correo = $_POST['email'];
+$direccion = $_POST['address'];
+$nacimiento = $_POST['date'];
 $id = $_POST['id'];
 
 $sql = "UPDATE maestros SET nombre=?, email=?, direccion=?, fecha=? WHERE id=?";
